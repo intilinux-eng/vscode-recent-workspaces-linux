@@ -86,12 +86,10 @@ tools/xbel_probe.py ~/Projects/foo --remove                           # removes 
 
 ## Upstream
 
-The goal is native support:
+The goal is native support, tracked in **[microsoft/vscode#348335](https://github.com/microsoft/vscode/issues/348335)**:
 1. **Electron**: implement `app.addRecentDocument()` / `clearRecentDocuments()` on Linux with `GBookmarkFile`.
 2. **VS Code**: record opened workspaces on Linux.
 3. **KDE**: let `kactivitymanagerd` fall back to the XBEL `name` attribute when `exec` doesn't match.
-
-Links will be added here as the issues and PRs are opened.
 
 ## License
 
