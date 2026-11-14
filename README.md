@@ -27,6 +27,21 @@ Some details:
 - Removing an entry from VS Code's recent list also removes it from the registry and from Plasma's stats.
 - Other applications' registrations are never touched: only VS Code's own `<bookmark:application>` element is added or removed.
 
+## Known limitation: folders open in the file manager
+
+Plasma opens a recent item with the recording app only if that app's `.desktop` file declares the item's MIME type. Otherwise it uses the default handler. VS Code deliberately does **not** declare `inode/directory` ([microsoft/vscode#114425](https://github.com/microsoft/vscode/issues/114425)), so clicking a recent folder opens Dolphin. Recent `.code-workspace` files are not affected.
+
+Workaround: use a user-level copy of the `.desktop` file that declares folders, and keep the file manager explicitly as the default for folders:
+
+```sh
+sed 's|^MimeType=.*|MimeType=application/x-code-workspace;inode/directory;|' \
+    /usr/share/applications/com.microsoft.VSCode.desktop > ~/.local/share/applications/com.microsoft.VSCode.desktop
+xdg-mime default org.kde.dolphin.desktop inode/directory
+kbuildsycoca6
+```
+
+Restart Plasma (`systemctl --user restart plasma-plasmashell`) or log out and back in. As a bonus, VS Code appears in Dolphin's *Open with* menu for folders. A proper fix is being proposed to Plasma: for directories, launch the recording app when its `Exec=` accepts files or URLs.
+
 ## Requirements
 
 - Python 3.9+ and PyGObject (`python3-gi` on Debian/Ubuntu)
