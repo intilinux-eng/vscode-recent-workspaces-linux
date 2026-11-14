@@ -40,7 +40,7 @@ xdg-mime default org.kde.dolphin.desktop inode/directory
 kbuildsycoca6
 ```
 
-Restart Plasma (`systemctl --user restart plasma-plasmashell`) or log out and back in. As a bonus, VS Code appears in Dolphin's *Open with* menu for folders. A proper fix is being proposed to Plasma: for directories, launch the recording app when its `Exec=` accepts files or URLs.
+Restart Plasma (`systemctl --user restart plasma-plasmashell`) or log out and back in. As a bonus, VS Code appears in Dolphin's *Open with* menu for folders. A proper fix is proposed to Plasma in [plasma/plasma-desktop!4231](https://invent.kde.org/plasma/plasma-desktop/-/merge_requests/4231): for directories, launch the recording app when its `Exec=` accepts files or URLs.
 
 ## Requirements
 
@@ -104,7 +104,9 @@ tools/xbel_probe.py ~/Projects/foo --remove                           # removes 
 The goal is native support, tracked in **[microsoft/vscode#348335](https://github.com/microsoft/vscode/issues/348335)**:
 1. **Electron**: implement `app.addRecentDocument()` / `clearRecentDocuments()` on Linux with `GBookmarkFile`.
 2. **VS Code**: record opened workspaces on Linux.
-3. **KDE**: let `kactivitymanagerd` fall back to the XBEL `name` attribute when `exec` doesn't match.
+3. **KDE**:
+   - Plasma task manager: open recent folders with the app that recorded them and show its icon. This fixes the limitation above: [plasma/plasma-desktop!4231](https://invent.kde.org/plasma/plasma-desktop/-/merge_requests/4231).
+   - `kactivitymanagerd`: fall back to the XBEL `name` attribute when `exec` doesn't match.
 
 ## License
 
