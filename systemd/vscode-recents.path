@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch VS Code's recently opened list
+
+[Path]
+PathModified=%h/.vscode-shared/sharedStorage/state.vscdb
+Unit=vscode-recents.service
+
+[Install]
+WantedBy=default.target

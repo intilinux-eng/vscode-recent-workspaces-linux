@@ -1,0 +1,10 @@
+[Unit]
+Description=Publish VS Code recent workspaces to the desktop (recently-used.xbel)
+Documentation=https://github.com/intilinux-eng/vscode-recent-workspaces-linux
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -I %h/.local/bin/vscode-recents sync
+
+[Install]
+WantedBy=default.target
